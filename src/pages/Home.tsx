@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import "./styles/Home.css"; // Importa o CSS específico para esse componente
+import { useNavigate } from "react-router-dom";
+import "./styles/Home.css";
 
 const Home: React.FC = () => {
   const [email, setEmail] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    localStorage.setItem("userEmail", email);
+
     console.log("Email enviado:", email);
-    // Aqui você pode realizar ações, como redirecionar o usuário ou salvar o e-mail
+
+    navigate("/inicial");
   };
 
   return (
@@ -30,7 +36,7 @@ const Home: React.FC = () => {
           Entrar
         </button>
         <div className="explain-dialog">
-            <p>Just to keep a process control over the application.</p>
+          <p>Just to keep a process control over the application.</p>
         </div>
       </form>
     </div>
